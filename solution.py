@@ -52,7 +52,7 @@ def readFile(filename):
 # Library ids = []
 # books = {} sa idijem lib-a, i listom knjiga
 def writeFile(filename, result):
-    fout = filename[:-3] + 'out'
+    fout = "out/" + filename[:-3] + 'out'
     fp = open(fout, "w")
 
     fp.write(str(len(result)) + '\n')
