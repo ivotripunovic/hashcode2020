@@ -67,15 +67,27 @@ def writeFile(filename, result):
 
 def solve(B, L, D, scores, libraries):
     result = []
+    scanned = set()
 
     for i in range(0, L):
         booksInLib = int(libraries[i][0][0])
-        libID = [libraries[i][0][3], booksInLib]
         books = []
-        for j in range(0, booksInLib):
-            books.append(libraries[i][1][j][0])
+        booksAdded = 0
+        timeAdded = 0
+        j = 0
+        while timeAdded < D and j < booksInLib:
+            bookIndex = libraries[i][1][j][0]
+            if bookIndex not in scanned:
+                books.append(bookIndex)
+                scanned.add(bookIndex)
+                booksAdded += 1
+                timeAdded = 1 / int(libraries[i][0][2])
+            j += 1
 
-        result.append([libID, books])
+        libID = [libraries[i][0][3], booksAdded]
+
+        if len(books) > 0:
+            result.append([libID, books])
 
     return result
 
